@@ -1,366 +1,357 @@
 <!DOCTYPE html>
 <html lang="es-CR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cámara de Cañeros Zona Sur | Premium Agro-Store</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --verde: #1a6b1a; --verde-claro: #2d8a2d; --verde-oscuro: #0f420f;
-            --dorado: #c8860a; --dorado-claro: #f0a820; --dorado-suave: #fef3d0;
-            --blanco: #ffffff; --gris-claro: #f5f4f0; --gris-medio: #e8e6e0;
-            --gris-texto: #4a4a42; --gris-oscuro: #2a2a22; --rojo: #d32f2f;
-            --sombra-premium: 0 10px 30px rgba(0,0,0,0.08);
-            --radio: 12px;
-        }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cámara de Cañeros Zona Sur – Almacén San Isidro | Pérez Zeledón, Costa Rica</title>
+  <meta name="description" content="Almacén agropecuario líder en Pérez Zeledón desde 1975. Fertilizantes, herbicidas, vacunas, veterinaria, equipos de riego y más."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          forest: { 950:'#021207', 900:'#052e16', 800:'#14532d', 700:'#166534', 600:'#15803d', 500:'#16a34a', 400:'#22c55e', 100:'#dcfce7', 50:'#f0fdf4' },
+          amber:  { 600:'#d97706', 500:'#f59e0b', 400:'#fbbf24', 100:'#fef3c7', 50:'#fffbeb' },
+          hay:    { DEFAULT:'#EAB308', light:'#FEF08A', dark:'#854D0E' },
+        },
+        fontFamily: {
+          display: ['"Cormorant Garamond"','Georgia','serif'],
+          body: ['"Outfit"','system-ui','sans-serif'],
+        },
+      }}
+    }
+  </script>
 
-        /* Reset & Base */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Source Sans 3', sans-serif; color: var(--gris-texto); background: var(--blanco); overflow-x: hidden; scroll-behavior: smooth; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+<style>
+:root {
+  --fg: #166534; --fg2: #14532d; --fg3: #052e16;
+  --gold:#EAB308; --goldd:#854D0E;
+}
+html { scroll-behavior: smooth; }
+body { font-family:'Outfit',sans-serif; background:#fff; color:#1c1c1c; }
 
-        /* --- NAVEGACIÓN --- */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(15, 66, 15, 0.98); backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--dorado); padding: 0 5%;
-        }
-        .nav-inner { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 80px; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--dorado-claro); }
+/* Grain Effect */
+body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9998; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E") opacity:.3; }
 
-        .cart-trigger {
-            position: relative; background: var(--dorado); color: var(--gris-oscuro);
-            padding: 10px 18px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700;
-        }
-        .cart-badge { background: var(--rojo); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.7rem; position: absolute; top: -5px; right: -5px; }
+/* Custom UI */
+.prod-card { border: 1px solid #f3f4f6; transition: all 0.3s ease; }
+.prod-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(22,101,52,0.1); }
 
-        /* --- TIENDA --- */
-        .store-header { padding: 120px 5% 40px; text-align: center; background: var(--gris-claro); }
-        .product-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; padding: 50px 5%; max-width: 1300px; margin: 0 auto;
-        }
-        .product-card {
-            background: white; border-radius: var(--radio); padding: 20px;
-            border: 1px solid var(--gris-medio); transition: 0.4s; position: relative;
-        }
-        .product-card:hover { transform: translateY(-10px); box-shadow: var(--sombra-premium); }
-        .product-img { width: 100%; height: 200px; background: #eee; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-        .product-category { font-size: 0.7rem; text-transform: uppercase; color: var(--dorado); font-weight: 700; }
-        .product-price { font-size: 1.5rem; color: var(--verde); font-weight: 700; margin: 10px 0; }
-        .btn-add { 
-            width: 100%; background: var(--verde); color: white; border: none; 
-            padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s;
-        }
-        .btn-add:hover { background: var(--verde-claro); }
+#cart-drawer { position:fixed; top:0; right:0; height:100%; width:100%; max-width:400px; background:#fff; z-index:3000; box-shadow:-10px 0 50px rgba(0,0,0,0.2); transform:translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+#cart-drawer.open { transform:translateX(0); }
 
-        /* --- SIDEBAR CARRITO --- */
-        #cart-sidebar {
-            position: fixed; top: 0; right: -450px; width: 450px; height: 100%;
-            background: white; z-index: 2000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.1); display: flex; flex-direction: column;
-        }
-        #cart-sidebar.open { right: 0; }
-        .cart-header { padding: 25px; border-bottom: 1px solid var(--gris-medio); display: flex; justify-content: space-between; align-items: center; background: var(--verde-oscuro); color: white; }
-        .cart-body { flex-grow: 1; overflow-y: auto; padding: 20px; }
-        .cart-footer { padding: 25px; border-top: 1px solid var(--gris-medio); background: var(--gris-claro); }
+.modal-checkout { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:4000; align-items:center; justify-content:center; padding:20px; }
+.modal-checkout.active { display:flex; }
 
-        /* --- PANEL DE ADMINISTRACIÓN (MODERNO) --- */
-        #admin-panel { display: none; padding: 120px 5% 50px; background: #f0f2f5; min-height: 100vh; }
-        .admin-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 30px; max-width: 1300px; margin: 0 auto; }
-        .admin-sidebar { background: white; padding: 20px; border-radius: var(--radio); height: fit-content; }
-        .admin-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 20px; border-radius: var(--radio); border-left: 5px solid var(--dorado); }
-
-        /* --- MODAL CHECKOUT --- */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; }
-        .modal-content { background: white; width: 95%; max-width: 600px; border-radius: 20px; padding: 40px; position: relative; max-height: 90vh; overflow-y: auto; }
-
-        /* Utilitarios */
-        .hidden { display: none; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; }
-        .overlay.active { display: block; }
-        
-        @media (max-width: 768px) { #cart-sidebar { width: 100%; right: -100%; } }
-    </style>
+/* Admin View */
+#admin-panel { display:none; background:#f8fafc; min-height:100vh; padding-top:100px; }
+</style>
 </head>
 <body>
 
-    <div id="main-overlay" class="overlay" onclick="toggleCart()"></div>
-
-    <nav>
-        <div class="nav-inner">
-            <a href="#" class="nav-logo" onclick="toggleView('client')">
-                <span style="font-size: 2rem;">🌿</span>
-                <div style="line-height: 1.1;">
-                    <strong style="display: block; font-size: 1.2rem;">Cámara de Cañeros</strong>
-                    <span style="font-size: 0.7rem; color: var(--dorado-claro); letter-spacing: 1px;">ALMACÉN SAN ISIDRO</span>
-                </div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#" onclick="toggleView('admin')" style="background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 5px;">⚙️ Admin</a></li>
-                <li class="cart-trigger" onclick="toggleCart()">
-                    🛒 <span class="hidden-mobile">Mi Pedido</span>
-                    <span id="global-cart-count" class="cart-badge">0</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div id="client-view">
-        <header class="store-header">
-            <span style="color: var(--verde); font-weight: 700; letter-spacing: 2px;">PRODUCTOS PARA EL CAMPO</span>
-            <h1 style="font-size: 3rem; margin: 10px 0;">Catálogo Agroveterinario</h1>
-            <p>Insumos de alta calidad con respaldo técnico especializado.</p>
-        </header>
-
-        <section id="productos" class="product-grid">
-            </section>
-    </div>
-
-    <div id="admin-panel">
-        <div class="admin-grid">
-            <div class="admin-sidebar">
-                <h3 style="margin-bottom: 20px;">Gestión de Negocio</h3>
-                <ul style="list-style: none; line-height: 2.5;">
-                    <li><strong>📊 Dashboard</strong></li>
-                    <li>📦 Inventario</li>
-                    <li>👥 Clientes</li>
-                    <li onclick="toggleView('client')" style="cursor: pointer; color: var(--rojo);">⬅ Cerrar Sesión</li>
-                </ul>
+<header class="sticky top-0 z-[100] bg-forest-900/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center shadow-lg">🌿</div>
+            <div>
+                <span class="block text-white font-display font-bold text-lg leading-tight">Cámara de Cañeros</span>
+                <span class="block text-amber-400 text-[10px] uppercase tracking-widest font-bold">San Isidro · P. Zeledón</span>
             </div>
-            <div class="admin-main">
-                <div class="admin-stats">
-                    <div class="stat-card"><span>Ventas Hoy</span><h2 id="stat-ventas">₡0</h2></div>
-                    <div class="stat-card"><span>Pedidos</span><h2 id="stat-pedidos">0</h2></div>
-                    <div class="stat-card"><span>Pendientes</span><h2 style="color: var(--dorado);">7</h2></div>
+        </a>
+
+        <nav class="hidden md:flex gap-8 text-white/80 font-medium text-sm">
+            <a href="#catalogo" class="hover:text-amber-400 transition-colors">Catálogo</a>
+            <a href="#" onclick="showView('admin')" class="hover:text-amber-400 transition-colors border border-amber-500/30 px-3 py-1 rounded">⚙️ Dashboard</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+            <button onclick="toggleCart()" class="relative bg-amber-500 text-forest-950 px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-105 transition-transform">
+                🛒 Mi Pedido
+                <span id="cart-count" class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="client-view">
+    <section class="relative h-[70vh] flex items-center overflow-hidden bg-forest-900">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Finca">
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <span class="inline-block bg-white/10 backdrop-blur-md text-amber-400 px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-6">EST. 1975 · COSTA RICA</span>
+            <h1 class="font-display text-6xl md:text-8xl text-white font-bold leading-none mb-6">Todo para su <br><span class="text-amber-500 italic">finca</span> aquí.</h1>
+            <p class="text-white/70 max-w-lg text-lg mb-8">Insumos agrícolas y veterinaria con el respaldo técnico de la Cámara de Cañeros Zona Sur.</p>
+            <a href="#catalogo" class="bg-amber-500 text-forest-950 px-8 py-4 rounded-2xl font-black text-lg hover:bg-amber-400 shadow-2xl transition-all">VER CATÁLOGO 2026</a>
+        </div>
+    </section>
+
+    <section id="catalogo" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="font-display text-5xl text-forest-900 font-bold">Nuestra Bodega</h2>
+                    <p class="text-gray-500 mt-2">Productos certificados para entrega inmediata.</p>
                 </div>
+                <div class="flex gap-2">
+                    <button onclick="filterCat('todos')" class="px-4 py-2 bg-forest-800 text-white rounded-full text-xs font-bold">Todos</button>
+                    <button onclick="filterCat('agricola')" class="px-4 py-2 bg-white border rounded-full text-xs font-bold hover:bg-forest-50">🌱 Agrícola</button>
+                    <button onclick="filterCat('veterinaria')" class="px-4 py-2 bg-white border rounded-full text-xs font-bold hover:bg-forest-50">🐄 Veterinaria</button>
+                </div>
+            </div>
+
+            <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                </div>
+        </div>
+    </section>
+</main>
+
+<section id="admin-panel">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="font-display text-4xl font-bold text-forest-900">Panel de Control Almacén</h2>
+            <button onclick="showView('client')" class="text-red-600 font-bold">← Volver a la Tienda</button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-forest-100">
+                <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Ventas del Día</span>
+                <h3 id="stat-ventas" class="text-4xl font-display font-bold text-forest-700 mt-2">₡0</h3>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-forest-100">
+                <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Pedidos Nuevos</span>
+                <h3 id="stat-pedidos" class="text-4xl font-display font-bold text-forest-700 mt-2">0</h3>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-amber-100 bg-amber-50">
+                <span class="text-amber-800 text-xs font-bold uppercase tracking-widest">Estado Servidor</span>
+                <h3 class="text-xl font-bold text-forest-700 mt-2 text-green-600">En Línea ●</h3>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-forest-900 text-white text-xs uppercase">
+                    <tr>
+                        <th class="px-6 py-4">Orden</th>
+                        <th class="px-6 py-4">Cliente</th>
+                        <th class="px-6 py-4">Método</th>
+                        <th class="px-6 py-4">Monto Total</th>
+                        <th class="px-6 py-4">Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-orders" class="text-sm divide-y divide-gray-100">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div id="cart-drawer">
+    <div class="p-6 bg-forest-900 text-white flex justify-between items-center">
+        <h3 class="font-display text-xl font-bold">Lista de Pedido</h3>
+        <button onclick="toggleCart()" class="text-2xl">&times;</button>
+    </div>
+    <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
+        </div>
+    <div class="p-6 border-t bg-gray-50">
+        <div class="flex justify-between mb-2 text-gray-500">
+            <span>Subtotal:</span>
+            <span id="cart-subtotal">₡0</span>
+        </div>
+        <div class="flex justify-between mb-6 text-xl font-black text-forest-900">
+            <span>Total (IVA):</span>
+            <span id="cart-total">₡0</span>
+        </div>
+        <button onclick="openCheckout()" class="w-full bg-amber-500 py-4 rounded-2xl font-black text-forest-950 hover:bg-amber-400 shadow-xl">PAGAR AHORA</button>
+    </div>
+</div>
+
+<div id="checkout-modal" class="modal-checkout">
+    <div class="bg-white w-full max-w-2xl rounded-[40px] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        <div class="bg-forest-900 md:w-1/3 p-8 text-white">
+            <h4 class="font-display text-2xl font-bold mb-4">Resumen</h4>
+            <p class="text-white/60 text-xs leading-relaxed">Su pedido será procesado de inmediato por nuestro equipo en San Isidro.</p>
+            <div class="mt-8 pt-8 border-t border-white/10">
+                <span class="block text-[10px] text-amber-400 font-bold uppercase mb-1">Monto a pagar</span>
+                <span id="modal-pay-amount" class="text-2xl font-bold italic">₡0</span>
+            </div>
+        </div>
+        <div class="md:w-2/3 p-8">
+            <div class="flex gap-4 mb-8">
+                <button onclick="switchTab('sinpe')" id="tab-sinpe" class="flex-1 py-3 rounded-xl border-2 border-forest-500 bg-forest-50 text-forest-900 font-bold text-sm">SINPE Móvil</button>
+                <button onclick="switchTab('card')" id="tab-card" class="flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm">Tarjeta</button>
+            </div>
+
+            <form id="pay-form" class="space-y-4">
+                <input type="text" placeholder="Nombre completo" required class="w-full p-4 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-amber-500">
                 
-                <div style="background: white; padding: 25px; border-radius: var(--radio);">
-                    <h3 style="margin-bottom: 20px;">Pedidos Recientes</h3>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                        <thead style="background: var(--gris-claro); text-align: left;">
-                            <tr>
-                                <th style="padding: 12px;">ID</th>
-                                <th>Cliente</th>
-                                <th>Monto</th>
-                                <th>Estado</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-orders-body">
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="cart-sidebar">
-        <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <button onclick="toggleCart()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">✕</button>
-        </div>
-        <div id="cart-items" class="cart-body">
-            </div>
-        <div class="cart-footer">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span>Subtotal</span>
-                <span id="cart-subtotal">₡0</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: 700; font-size: 1.2rem;">
-                <span>Total (IVI)</span>
-                <span id="cart-total" style="color: var(--verde);">₡0</span>
-            </div>
-            <button class="btn-add" style="background: var(--dorado); color: var(--gris-oscuro);" onclick="openCheckout()">PROCESAR PAGO</button>
-        </div>
-    </div>
-
-    <div id="checkout-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="margin-bottom: 20px; border-bottom: 2px solid var(--dorado);">Finalizar Compra</h2>
-            <form id="payment-form">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600;">Nombre</label>
-                        <input type="text" required style="width: 100%; padding: 10px; border: 1px solid var(--gris-medio); border-radius: 5px;">
+                <div id="fields-sinpe" class="space-y-4">
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <p class="text-[10px] font-bold text-amber-800 uppercase">Instrucciones</p>
+                        <p class="text-xs text-amber-900 mt-1">Transfiera al <strong>8456-2817</strong> y suba la captura de pantalla.</p>
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600;">WhatsApp</label>
-                        <input type="tel" placeholder="8888-8888" required style="width: 100%; padding: 10px; border: 1px solid var(--gris-medio); border-radius: 5px;">
+                    <input type="file" class="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-forest-50 file:text-forest-700">
+                </div>
+
+                <div id="fields-card" class="hidden space-y-4">
+                    <input type="text" placeholder="Número de Tarjeta" class="w-full p-4 bg-gray-50 border-none rounded-xl text-sm">
+                    <div class="flex gap-4">
+                        <input type="text" placeholder="MM/AA" class="w-1/2 p-4 bg-gray-50 border-none rounded-xl text-sm">
+                        <input type="password" placeholder="CVV" class="w-1/2 p-4 bg-gray-50 border-none rounded-xl text-sm">
                     </div>
                 </div>
 
-                <div style="background: var(--dorado-suave); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <p style="font-size: 0.9rem; margin-bottom: 10px;"><strong>Método de Pago: SINPE MÓVIL</strong></p>
-                    <p style="font-size: 0.8rem;">Transfiere a: <strong>8456-2817</strong><br>A nombre de: Cámara de Cañeros Zona Sur</p>
-                    <input type="file" accept="image/*" required style="margin-top: 10px; font-size: 0.8rem;">
-                </div>
-
-                <button type="submit" class="btn-add" style="height: 50px;">CONFIRMAR PEDIDO (₡<span id="modal-amount">0</span>)</button>
-                <button type="button" onclick="closeCheckout()" style="width: 100%; margin-top: 15px; background: none; border: none; color: var(--rojo); cursor: pointer;">Cancelar</button>
+                <button type="submit" class="w-full bg-forest-900 text-white py-4 rounded-2xl font-bold hover:bg-forest-800 transition-all mt-6 shadow-lg shadow-forest-200">CONFIRMAR PAGO</button>
+                <button type="button" onclick="closeCheckout()" class="w-full text-gray-400 text-xs font-bold">CANCELAR Y VOLVER</button>
             </form>
         </div>
     </div>
+</div>
 
-    <script>
-        // --- BASE DE DATOS (Simulada) ---
-        const products = [
-            { id: 1, name: "Fertilizante Cañero 10-30-10", price: 29500, cat: "Agrícola", emoji: "🌱" },
-            { id: 2, name: "Herbicida Glifosato 5L", price: 15800, cat: "Químicos", emoji: "🧪" },
-            { id: 3, name: "Suplemento Ganado Bovino", price: 22400, cat: "Veterinaria", emoji: "🐄" },
-            { id: 4, name: "Bomba de Riego Eléctrica", price: 85000, cat: "Equipos", emoji: "⚙️" },
-            { id: 5, name: "Machete Tramontina Pro", price: 9500, cat: "Herramientas", emoji: "⚔️" },
-            { id: 6, name: "Sal Mineralizada (Saco)", price: 18200, cat: "Veterinaria", emoji: "🧂" }
-        ];
+<script>
+const products = [
+    { id: 1, name: "Fertilizante Cañero Pro", price: 32000, cat: "agricola", img: "🌱", desc: "Mezcla premium 10-30-10 para caña." },
+    { id: 2, name: "Herbicida Glifosato 5L", price: 18500, cat: "agricola", img: "🧪", desc: "Control total de maleza en post-emergencia." },
+    { id: 3, name: "Complejo B Inyectable", price: 9800, cat: "veterinaria", img: "🐄", desc: "Suplemento vitamínico para ganado." },
+    { id: 4, name: "Bomba de Riego 2HP", price: 145000, cat: "agricola", img: "⚙️", desc: "Equipo de alta presión para aspersión." },
+    { id: 5, name: "Saco Sal Mineralizada", price: 21000, cat: "veterinaria", img: "🧂", desc: "Refuerzo nutricional para bovinos." },
+    { id: 6, name: "Antibiótico Mastitis", price: 12500, cat: "veterinaria", img: "💉", desc: "Tratamiento efectivo de amplio espectro." }
+];
 
-        let cart = [];
-        let orders = [];
+let cart = [];
+let orders = [];
+let currentMethod = 'sinpe';
 
-        // --- FUNCIONES DE TIENDA ---
-        function initStore() {
-            const grid = document.getElementById('productos');
-            grid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <div class="product-img">${p.emoji}</div>
-                    <span class="product-category">${p.cat}</span>
-                    <h3 style="font-size: 1.1rem; margin-top: 5px;">${p.name}</h3>
-                    <div class="product-price">₡${p.price.toLocaleString()}</div>
-                    <button class="btn-add" onclick="addToCart(${p.id})">Agregar al Pedido</button>
-                </div>
-            `).join('');
-        }
+// Vistas
+function showView(view) {
+    document.getElementById('client-view').style.display = view === 'client' ? 'block' : 'none';
+    document.getElementById('admin-panel').style.display = view === 'admin' ? 'block' : 'none';
+    if(view === 'admin') renderAdmin();
+    window.scrollTo(0,0);
+}
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push(product);
-            updateCart();
-            // Notificación visual rápida
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = "¡Agregado! ✓";
-            btn.style.background = "#c8860a";
-            setTimeout(() => { btn.innerText = originalText; btn.style.background = "#1a6b1a"; }, 1000);
-        }
+// Catálogo
+function renderCatalog(filter = 'todos') {
+    const grid = document.getElementById('grid-productos');
+    const filtered = filter === 'todos' ? products : products.filter(p => p.cat === filter);
+    
+    grid.innerHTML = filtered.map(p => `
+        <div class="prod-card bg-white p-6 rounded-[32px] flex flex-col">
+            <div class="h-40 bg-gray-50 rounded-2xl flex items-center justify-center text-5xl mb-6">${p.img}</div>
+            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">${p.cat}</span>
+            <h3 class="font-display text-xl font-bold text-forest-900 mt-1">${p.name}</h3>
+            <p class="text-gray-400 text-xs mt-2 flex-grow">${p.desc}</p>
+            <div class="flex justify-between items-center mt-6">
+                <span class="text-forest-700 font-bold font-display text-lg italic">₡${p.price.toLocaleString()}</span>
+                <button onclick="addToCart(${p.id})" class="bg-forest-900 text-white w-10 h-10 rounded-xl hover:bg-amber-500 hover:text-forest-950 transition-colors">+</button>
+            </div>
+        </div>
+    `).join('');
+}
 
-        function updateCart() {
-            const container = document.getElementById('cart-items');
-            const totalCount = document.getElementById('global-cart-count');
-            const totalEl = document.getElementById('cart-total');
-            const subtotalEl = document.getElementById('cart-subtotal');
+function filterCat(cat) {
+    renderCatalog(cat);
+}
 
-            totalCount.innerText = cart.length;
-            
-            if (cart.length === 0) {
-                container.innerHTML = `<p style="text-align:center; color:#888; margin-top:50px;">Tu carrito está vacío</p>`;
-            } else {
-                container.innerHTML = cart.map((item, idx) => `
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                        <div>
-                            <p style="font-weight:600; font-size:0.9rem;">${item.name}</p>
-                            <p style="color:var(--verde); font-size:0.8rem;">₡${item.price.toLocaleString()}</p>
-                        </div>
-                        <button onclick="removeItem(${idx})" style="color:red; background:none; border:none; cursor:pointer;">✕</button>
-                    </div>
-                `).join('');
-            }
+// Carrito
+function toggleCart() {
+    document.getElementById('cart-drawer').classList.toggle('open');
+}
 
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            subtotalEl.innerText = `₡${total.toLocaleString()}`;
-            totalEl.innerText = `₡${total.toLocaleString()}`;
-            document.getElementById('modal-amount').innerText = total.toLocaleString();
-        }
+function addToCart(id) {
+    const p = products.find(x => x.id === id);
+    cart.push(p);
+    updateUI();
+}
 
-        function removeItem(idx) {
-            cart.splice(idx, 1);
-            updateCart();
-        }
+function updateUI() {
+    const list = document.getElementById('cart-items');
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    
+    document.getElementById('cart-count').innerText = cart.length;
+    document.getElementById('cart-subtotal').innerText = `₡${total.toLocaleString()}`;
+    document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
+    document.getElementById('modal-pay-amount').innerText = `₡${total.toLocaleString()}`;
 
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('open');
-            document.getElementById('main-overlay').classList.toggle('active');
-        }
+    list.innerHTML = cart.map((item, idx) => `
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+            <span class="text-2xl">${item.img}</span>
+            <div class="flex-grow">
+                <h4 class="text-xs font-bold text-forest-900">${item.name}</h4>
+                <p class="text-[10px] text-gray-400">P. Unitario: ₡${item.price.toLocaleString()}</p>
+            </div>
+            <button onclick="removeFromCart(${idx})" class="text-red-400 text-sm">✕</button>
+        </div>
+    `).join('');
+}
 
-        // --- SISTEMA DE PAGOS Y ADMIN ---
-        function openCheckout() {
-            if (cart.length === 0) return alert("Agrega productos primero");
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
+function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    updateUI();
+}
 
-        function closeCheckout() {
-            document.getElementById('checkout-modal').style.display = 'none';
-        }
+// Checkout
+function openCheckout() {
+    if(cart.length === 0) return alert("El pedido está vacío.");
+    document.getElementById('checkout-modal').classList.add('active');
+}
 
-        document.getElementById('payment-form').onsubmit = function(e) {
-            e.preventDefault();
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const orderId = "PED-" + Math.floor(Math.random() * 9000 + 1000);
-            
-            const newOrder = {
-                id: orderId,
-                client: e.target[0].value,
-                amount: total,
-                status: "Procesando SINPE"
-            };
+function closeCheckout() {
+    document.getElementById('checkout-modal').classList.remove('active');
+}
 
-            orders.unshift(newOrder); // Agregar al inicio para el admin
-            
-            alert(`¡Gracias! Pedido ${orderId} recibido. Revisaremos el comprobante.`);
-            
-            // Limpiar todo
-            cart = [];
-            updateCart();
-            closeCheckout();
-            toggleCart();
-            renderAdmin();
-        };
+function switchTab(method) {
+    currentMethod = method;
+    document.getElementById('fields-sinpe').classList.toggle('hidden', method !== 'sinpe');
+    document.getElementById('fields-card').classList.toggle('hidden', method !== 'card');
+    document.getElementById('tab-sinpe').className = method === 'sinpe' ? 'flex-1 py-3 rounded-xl border-2 border-forest-500 bg-forest-50 text-forest-900 font-bold text-sm' : 'flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm text-gray-400';
+    document.getElementById('tab-card').className = method === 'card' ? 'flex-1 py-3 rounded-xl border-2 border-forest-500 bg-forest-50 text-forest-900 font-bold text-sm' : 'flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm text-gray-400';
+}
 
-        function toggleView(view) {
-            if (view === 'admin') {
-                document.getElementById('client-view').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'block';
-                renderAdmin();
-            } else {
-                document.getElementById('client-view').style.display = 'block';
-                document.getElementById('admin-panel').style.display = 'none';
-            }
-            window.scrollTo(0, 0);
-        }
+// Procesar Pago
+document.getElementById('pay-form').onsubmit = function(e) {
+    e.preventDefault();
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const order = {
+        id: "CAN-" + Math.floor(Math.random()*9000),
+        client: e.target[0].value,
+        method: currentMethod === 'sinpe' ? "SINPE MÓVIL" : "TARJETA BANCARIA",
+        amount: total,
+        status: "Validando"
+    };
+    
+    orders.unshift(order);
+    alert(`¡Transacción Exitosa!\nSu pedido ${order.id} está siendo preparado.`);
+    cart = [];
+    updateUI();
+    closeCheckout();
+    toggleCart();
+    renderAdmin();
+};
 
-        function renderAdmin() {
-            const tbody = document.getElementById('admin-orders-body');
-            const totalSales = orders.reduce((sum, o) => sum + o.amount, 0);
-            
-            document.getElementById('stat-ventas').innerText = `₡${totalSales.toLocaleString()}`;
-            document.getElementById('stat-pedidos').innerText = orders.length;
+function renderAdmin() {
+    const tbody = document.getElementById('admin-orders');
+    const totalVentas = orders.reduce((s, o) => s + o.amount, 0);
+    
+    document.getElementById('stat-ventas').innerText = `₡${totalVentas.toLocaleString()}`;
+    document.getElementById('stat-pedidos').innerText = orders.length;
 
-            if (orders.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px;">Esperando ventas...</td></tr>`;
-                return;
-            }
+    tbody.innerHTML = orders.map(o => `
+        <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 font-bold text-forest-700">${o.id}</td>
+            <td class="px-6 py-4 font-medium text-gray-600">${o.client}</td>
+            <td class="px-6 py-4 text-[10px] font-bold uppercase text-gray-400">${o.method}</td>
+            <td class="px-6 py-4 font-black text-forest-900">₡${o.amount.toLocaleString()}</td>
+            <td class="px-6 py-4">
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">PAGADO ✓</span>
+            </td>
+        </tr>
+    `).join('');
+}
 
-            tbody.innerHTML = orders.map(o => `
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding:15px; font-weight:700;">${o.id}</td>
-                    <td>${o.client}</td>
-                    <td style="color:var(--verde); font-weight:700;">₡${o.amount.toLocaleString()}</td>
-                    <td><span style="background:var(--dorado-suave); padding:4px 10px; border-radius:4px; font-size:0.7rem;">${o.status}</span></td>
-                    <td><button onclick="alert('Pedido despachado')" style="font-size:0.7rem; padding:5px; cursor:pointer;">Aprobar</button></td>
-                </tr>
-            `).join('');
-        }
-
-        // Iniciar
-        initStore();
-        updateCart();
-    </script>
+renderCatalog();
+</script>
 </body>
 </html>
