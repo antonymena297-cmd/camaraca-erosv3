@@ -27,51 +27,43 @@
   </script>
 
 <style>
-:root {
-  --fg: #166534; --fg2: #14532d; --fg3: #052e16;
-  --gold:#EAB308; --goldd:#854D0E;
-}
+:root { --fg: #166534; --fg2: #14532d; --fg3: #052e16; --gold:#EAB308; --goldd:#854D0E; }
 html { scroll-behavior: smooth; }
-body { font-family:'Outfit',sans-serif; background:#fff; color:#1c1c1c; }
+body { font-family:'Outfit',sans-serif; background:#fff; color:#1c1c1c; overflow-x: hidden; }
 
 /* Grain Effect */
 body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9998; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E") opacity:.3; }
 
-/* Custom UI */
 .prod-card { border: 1px solid #f3f4f6; transition: all 0.3s ease; }
 .prod-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(22,101,52,0.1); }
 
-#cart-drawer { position:fixed; top:0; right:0; height:100%; width:100%; max-width:400px; background:#fff; z-index:3000; box-shadow:-10px 0 50px rgba(0,0,0,0.2); transform:translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+#cart-drawer { position:fixed; top:0; right:0; height:100%; width:100%; max-width:400px; background:#fff; z-index:3000; box-shadow:-10px 0 50px rgba(0,0,0,0.2); transform:translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); display:flex; flex-direction:column; }
 #cart-drawer.open { transform:translateX(0); }
 
-.modal-checkout { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:4000; align-items:center; justify-content:center; padding:20px; }
+.modal-checkout { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:4000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(4px); }
 .modal-checkout.active { display:flex; }
 
-/* Admin View */
-#admin-panel { display:none; background:#f8fafc; min-height:100vh; padding-top:100px; }
+#admin-panel { display:none; background:#f8fafc; min-height:100vh; padding-top:100px; padding-bottom: 100px; }
 </style>
 </head>
 <body>
 
 <header class="sticky top-0 z-[100] bg-forest-900/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="#" class="flex items-center gap-3">
+        <a href="#" onclick="showView('client')" class="flex items-center gap-3">
             <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center shadow-lg">🌿</div>
             <div>
                 <span class="block text-white font-display font-bold text-lg leading-tight">Cámara de Cañeros</span>
                 <span class="block text-amber-400 text-[10px] uppercase tracking-widest font-bold">San Isidro · P. Zeledón</span>
             </div>
         </a>
-
         <nav class="hidden md:flex gap-8 text-white/80 font-medium text-sm">
             <a href="#catalogo" class="hover:text-amber-400 transition-colors">Catálogo</a>
-            <a href="#" onclick="showView('admin')" class="hover:text-amber-400 transition-colors border border-amber-500/30 px-3 py-1 rounded">⚙️ Dashboard</a>
+            <button onclick="showView('admin')" class="hover:text-amber-400 transition-colors border border-amber-500/30 px-3 py-1 rounded">⚙️ Dashboard</button>
         </nav>
-
         <div class="flex items-center gap-4">
-            <button onclick="toggleCart()" class="relative bg-amber-500 text-forest-950 px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-105 transition-transform">
-                🛒 Mi Pedido
-                <span id="cart-count" class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
+            <button onclick="toggleCart()" class="relative bg-amber-500 text-forest-950 px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-105 transition-transform shadow-lg">
+                🛒 Mi Pedido <span id="cart-count" class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
             </button>
         </div>
     </div>
@@ -81,10 +73,10 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
     <section class="relative h-[70vh] flex items-center overflow-hidden bg-forest-900">
         <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Finca">
         <div class="relative z-10 max-w-7xl mx-auto px-6">
-            <span class="inline-block bg-white/10 backdrop-blur-md text-amber-400 px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-6">EST. 1975 · COSTA RICA</span>
+            <span class="inline-block bg-white/10 backdrop-blur-md text-amber-400 px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-6 uppercase">EST. 1975 · COSTA RICA</span>
             <h1 class="font-display text-6xl md:text-8xl text-white font-bold leading-none mb-6">Todo para su <br><span class="text-amber-500 italic">finca</span> aquí.</h1>
             <p class="text-white/70 max-w-lg text-lg mb-8">Insumos agrícolas y veterinaria con el respaldo técnico de la Cámara de Cañeros Zona Sur.</p>
-            <a href="#catalogo" class="bg-amber-500 text-forest-950 px-8 py-4 rounded-2xl font-black text-lg hover:bg-amber-400 shadow-2xl transition-all">VER CATÁLOGO 2026</a>
+            <a href="#catalogo" class="bg-amber-500 text-forest-950 px-8 py-4 rounded-2xl font-black text-lg hover:bg-amber-400 shadow-2xl transition-all uppercase tracking-tight">VER CATÁLOGO 2026</a>
         </div>
     </section>
 
@@ -95,15 +87,13 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
                     <h2 class="font-display text-5xl text-forest-900 font-bold">Nuestra Bodega</h2>
                     <p class="text-gray-500 mt-2">Productos certificados para entrega inmediata.</p>
                 </div>
-                <div class="flex gap-2">
-                    <button onclick="filterCat('todos')" class="px-4 py-2 bg-forest-800 text-white rounded-full text-xs font-bold">Todos</button>
-                    <button onclick="filterCat('agricola')" class="px-4 py-2 bg-white border rounded-full text-xs font-bold hover:bg-forest-50">🌱 Agrícola</button>
-                    <button onclick="filterCat('veterinaria')" class="px-4 py-2 bg-white border rounded-full text-xs font-bold hover:bg-forest-50">🐄 Veterinaria</button>
+                <div class="flex gap-2 bg-white p-1.5 rounded-full shadow-sm border">
+                    <button onclick="filterCat('todos')" class="px-5 py-2 hover:bg-forest-50 rounded-full text-xs font-bold transition-all">Todos</button>
+                    <button onclick="filterCat('agricola')" class="px-5 py-2 hover:bg-forest-50 rounded-full text-xs font-bold transition-all">🌱 Agrícola</button>
+                    <button onclick="filterCat('veterinaria')" class="px-5 py-2 hover:bg-forest-50 rounded-full text-xs font-bold transition-all">🐄 Veterinaria</button>
                 </div>
             </div>
-
-            <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                </div>
+            <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
         </div>
     </section>
 </main>
@@ -112,7 +102,7 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
     <div class="max-w-7xl mx-auto px-6">
         <div class="flex justify-between items-center mb-8">
             <h2 class="font-display text-4xl font-bold text-forest-900">Panel de Control Almacén</h2>
-            <button onclick="showView('client')" class="text-red-600 font-bold">← Volver a la Tienda</button>
+            <button onclick="showView('client')" class="text-red-600 font-bold hover:underline">← Volver a la Tienda</button>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -126,37 +116,36 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
             </div>
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-amber-100 bg-amber-50">
                 <span class="text-amber-800 text-xs font-bold uppercase tracking-widest">Estado Servidor</span>
-                <h3 class="text-xl font-bold text-forest-700 mt-2 text-green-600">En Línea ●</h3>
+                <h3 class="text-xl font-bold text-green-600 mt-2">En Línea ●</h3>
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border">
             <table class="w-full text-left">
-                <thead class="bg-forest-900 text-white text-xs uppercase">
+                <thead class="bg-forest-900 text-white text-[10px] uppercase tracking-widest">
                     <tr>
-                        <th class="px-6 py-4">Orden</th>
-                        <th class="px-6 py-4">Cliente</th>
-                        <th class="px-6 py-4">Método</th>
-                        <th class="px-6 py-4">Monto Total</th>
-                        <th class="px-6 py-4">Estado</th>
+                        <th class="px-6 py-5">Orden</th>
+                        <th class="px-6 py-5">Cliente</th>
+                        <th class="px-6 py-5">Método</th>
+                        <th class="px-6 py-5">Monto Total</th>
+                        <th class="px-6 py-5">Estado</th>
                     </tr>
                 </thead>
-                <tbody id="admin-orders" class="text-sm divide-y divide-gray-100">
-                    </tbody>
+                <tbody id="admin-orders" class="text-sm divide-y divide-gray-100"></tbody>
             </table>
         </div>
+        <button onclick="localStorage.removeItem('almacen_pedidos'); location.reload();" class="mt-8 text-gray-300 text-[10px] hover:text-red-500 uppercase font-bold">Limpiar base de datos local</button>
     </div>
 </section>
 
 <div id="cart-drawer">
     <div class="p-6 bg-forest-900 text-white flex justify-between items-center">
         <h3 class="font-display text-xl font-bold">Lista de Pedido</h3>
-        <button onclick="toggleCart()" class="text-2xl">&times;</button>
+        <button onclick="toggleCart()" class="text-2xl hover:text-amber-400">&times;</button>
     </div>
-    <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
-        </div>
+    <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
     <div class="p-6 border-t bg-gray-50">
-        <div class="flex justify-between mb-2 text-gray-500">
+        <div class="flex justify-between mb-2 text-gray-500 text-sm font-medium">
             <span>Subtotal:</span>
             <span id="cart-subtotal">₡0</span>
         </div>
@@ -164,12 +153,12 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
             <span>Total (IVA):</span>
             <span id="cart-total">₡0</span>
         </div>
-        <button onclick="openCheckout()" class="w-full bg-amber-500 py-4 rounded-2xl font-black text-forest-950 hover:bg-amber-400 shadow-xl">PAGAR AHORA</button>
+        <button onclick="openCheckout()" class="w-full bg-amber-500 py-4 rounded-2xl font-black text-forest-950 hover:bg-amber-400 shadow-xl transition-all">PAGAR AHORA</button>
     </div>
 </div>
 
 <div id="checkout-modal" class="modal-checkout">
-    <div class="bg-white w-full max-w-2xl rounded-[40px] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+    <div class="bg-white w-full max-w-2xl rounded-[40px] shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in zoom-in duration-300">
         <div class="bg-forest-900 md:w-1/3 p-8 text-white">
             <h4 class="font-display text-2xl font-bold mb-4">Resumen</h4>
             <p class="text-white/60 text-xs leading-relaxed">Su pedido será procesado de inmediato por nuestro equipo en San Isidro.</p>
@@ -181,20 +170,18 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
         <div class="md:w-2/3 p-8">
             <div class="flex gap-4 mb-8">
                 <button onclick="switchTab('sinpe')" id="tab-sinpe" class="flex-1 py-3 rounded-xl border-2 border-forest-500 bg-forest-50 text-forest-900 font-bold text-sm">SINPE Móvil</button>
-                <button onclick="switchTab('card')" id="tab-card" class="flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm">Tarjeta</button>
+                <button onclick="switchTab('card')" id="tab-card" class="flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm text-gray-400">Tarjeta</button>
             </div>
 
             <form id="pay-form" class="space-y-4">
-                <input type="text" placeholder="Nombre completo" required class="w-full p-4 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-amber-500">
-                
+                <input type="text" id="cust-name" placeholder="Nombre completo" required class="w-full p-4 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-amber-500">
                 <div id="fields-sinpe" class="space-y-4">
-                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
-                        <p class="text-[10px] font-bold text-amber-800 uppercase">Instrucciones</p>
-                        <p class="text-xs text-amber-900 mt-1">Transfiera al <strong>8456-2817</strong> y suba la captura de pantalla.</p>
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+                        <p class="font-bold uppercase mb-1">Instrucciones</p>
+                        Transfiera al <strong>8456-2817</strong> y adjunte el comprobante.
                     </div>
-                    <input type="file" class="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-forest-50 file:text-forest-700">
+                    <input type="file" id="sinpe-file" class="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-forest-50 file:text-forest-700">
                 </div>
-
                 <div id="fields-card" class="hidden space-y-4">
                     <input type="text" placeholder="Número de Tarjeta" class="w-full p-4 bg-gray-50 border-none rounded-xl text-sm">
                     <div class="flex gap-4">
@@ -202,15 +189,17 @@ body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:
                         <input type="password" placeholder="CVV" class="w-1/2 p-4 bg-gray-50 border-none rounded-xl text-sm">
                     </div>
                 </div>
-
-                <button type="submit" class="w-full bg-forest-900 text-white py-4 rounded-2xl font-bold hover:bg-forest-800 transition-all mt-6 shadow-lg shadow-forest-200">CONFIRMAR PAGO</button>
-                <button type="button" onclick="closeCheckout()" class="w-full text-gray-400 text-xs font-bold">CANCELAR Y VOLVER</button>
+                <button type="submit" class="w-full bg-forest-900 text-white py-4 rounded-2xl font-bold hover:bg-forest-800 transition-all mt-6 shadow-lg shadow-forest-200 uppercase tracking-widest">Confirmar Pago</button>
+                <button type="button" onclick="closeCheckout()" class="w-full text-gray-400 text-xs font-bold hover:text-gray-600">CANCELAR Y VOLVER</button>
             </form>
         </div>
     </div>
 </div>
 
 <script>
+// ==========================================
+// 1. TU BASE DE DATOS (PEGA AQUÍ TUS 1121 LÍNEAS)
+// ==========================================
 const products = [
     { id: 1, name: "Fertilizante Cañero Pro", price: 32000, cat: "agricola", img: "🌱", desc: "Mezcla premium 10-30-10 para caña." },
     { id: 2, name: "Herbicida Glifosato 5L", price: 18500, cat: "agricola", img: "🧪", desc: "Control total de maleza en post-emergencia." },
@@ -218,13 +207,18 @@ const products = [
     { id: 4, name: "Bomba de Riego 2HP", price: 145000, cat: "agricola", img: "⚙️", desc: "Equipo de alta presión para aspersión." },
     { id: 5, name: "Saco Sal Mineralizada", price: 21000, cat: "veterinaria", img: "🧂", desc: "Refuerzo nutricional para bovinos." },
     { id: 6, name: "Antibiótico Mastitis", price: 12500, cat: "veterinaria", img: "💉", desc: "Tratamiento efectivo de amplio espectro." }
+    // ... Aquí continúa pegando tus otros productos siguiendo el mismo formato
 ];
 
+// ==========================================
+// 2. LÓGICA DE PERSISTENCIA Y FUNCIONAMIENTO
+// ==========================================
 let cart = [];
-let orders = [];
+let orders = JSON.parse(localStorage.getItem('almacen_pedidos')) || [];
 let currentMethod = 'sinpe';
 
-// Vistas
+window.onload = () => { renderCatalog(); renderAdmin(); };
+
 function showView(view) {
     document.getElementById('client-view').style.display = view === 'client' ? 'block' : 'none';
     document.getElementById('admin-panel').style.display = view === 'admin' ? 'block' : 'none';
@@ -232,75 +226,56 @@ function showView(view) {
     window.scrollTo(0,0);
 }
 
-// Catálogo
 function renderCatalog(filter = 'todos') {
     const grid = document.getElementById('grid-productos');
     const filtered = filter === 'todos' ? products : products.filter(p => p.cat === filter);
-    
     grid.innerHTML = filtered.map(p => `
-        <div class="prod-card bg-white p-6 rounded-[32px] flex flex-col">
+        <div class="prod-card bg-white p-6 rounded-[32px] flex flex-col animate-in fade-in duration-500">
             <div class="h-40 bg-gray-50 rounded-2xl flex items-center justify-center text-5xl mb-6">${p.img}</div>
             <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">${p.cat}</span>
             <h3 class="font-display text-xl font-bold text-forest-900 mt-1">${p.name}</h3>
             <p class="text-gray-400 text-xs mt-2 flex-grow">${p.desc}</p>
             <div class="flex justify-between items-center mt-6">
                 <span class="text-forest-700 font-bold font-display text-lg italic">₡${p.price.toLocaleString()}</span>
-                <button onclick="addToCart(${p.id})" class="bg-forest-900 text-white w-10 h-10 rounded-xl hover:bg-amber-500 hover:text-forest-950 transition-colors">+</button>
+                <button onclick="addToCart(${p.id})" class="bg-forest-900 text-white w-10 h-10 rounded-xl hover:bg-amber-500 hover:text-forest-950 transition-all shadow-md font-bold">+</button>
             </div>
         </div>
     `).join('');
 }
 
-function filterCat(cat) {
-    renderCatalog(cat);
-}
-
-// Carrito
-function toggleCart() {
-    document.getElementById('cart-drawer').classList.toggle('open');
-}
+function filterCat(cat) { renderCatalog(cat); }
+function toggleCart() { document.getElementById('cart-drawer').classList.toggle('open'); }
 
 function addToCart(id) {
     const p = products.find(x => x.id === id);
     cart.push(p);
     updateUI();
+    if(!document.getElementById('cart-drawer').classList.contains('open')) toggleCart();
 }
 
 function updateUI() {
     const list = document.getElementById('cart-items');
     const total = cart.reduce((s, i) => s + i.price, 0);
-    
     document.getElementById('cart-count').innerText = cart.length;
     document.getElementById('cart-subtotal').innerText = `₡${total.toLocaleString()}`;
     document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
     document.getElementById('modal-pay-amount').innerText = `₡${total.toLocaleString()}`;
 
     list.innerHTML = cart.map((item, idx) => `
-        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
             <span class="text-2xl">${item.img}</span>
             <div class="flex-grow">
                 <h4 class="text-xs font-bold text-forest-900">${item.name}</h4>
-                <p class="text-[10px] text-gray-400">P. Unitario: ₡${item.price.toLocaleString()}</p>
+                <p class="text-[10px] text-gray-400 italic">₡${item.price.toLocaleString()}</p>
             </div>
-            <button onclick="removeFromCart(${idx})" class="text-red-400 text-sm">✕</button>
+            <button onclick="removeFromCart(${idx})" class="text-red-400 text-sm hover:text-red-600">✕</button>
         </div>
     `).join('');
 }
 
-function removeFromCart(idx) {
-    cart.splice(idx, 1);
-    updateUI();
-}
-
-// Checkout
-function openCheckout() {
-    if(cart.length === 0) return alert("El pedido está vacío.");
-    document.getElementById('checkout-modal').classList.add('active');
-}
-
-function closeCheckout() {
-    document.getElementById('checkout-modal').classList.remove('active');
-}
+function removeFromCart(idx) { cart.splice(idx, 1); updateUI(); }
+function openCheckout() { if(cart.length === 0) return alert("El pedido está vacío."); document.getElementById('checkout-modal').classList.add('active'); }
+function closeCheckout() { document.getElementById('checkout-modal').classList.remove('active'); }
 
 function switchTab(method) {
     currentMethod = method;
@@ -310,31 +285,29 @@ function switchTab(method) {
     document.getElementById('tab-card').className = method === 'card' ? 'flex-1 py-3 rounded-xl border-2 border-forest-500 bg-forest-50 text-forest-900 font-bold text-sm' : 'flex-1 py-3 rounded-xl border-2 border-gray-100 font-bold text-sm text-gray-400';
 }
 
-// Procesar Pago
 document.getElementById('pay-form').onsubmit = function(e) {
     e.preventDefault();
+    if (currentMethod === 'sinpe' && !document.getElementById('sinpe-file').files[0]) return alert("Por favor suba el comprobante de pago.");
+
     const total = cart.reduce((s, i) => s + i.price, 0);
     const order = {
-        id: "CAN-" + Math.floor(Math.random()*9000),
-        client: e.target[0].value,
+        id: "CAN-" + Math.floor(Math.random()*9000 + 1000),
+        client: document.getElementById('cust-name').value,
         method: currentMethod === 'sinpe' ? "SINPE MÓVIL" : "TARJETA BANCARIA",
         amount: total,
-        status: "Validando"
+        status: "Pagado",
+        date: new Date().toLocaleDateString()
     };
     
     orders.unshift(order);
-    alert(`¡Transacción Exitosa!\nSu pedido ${order.id} está siendo preparado.`);
-    cart = [];
-    updateUI();
-    closeCheckout();
-    toggleCart();
-    renderAdmin();
+    localStorage.setItem('almacen_pedidos', JSON.stringify(orders));
+    alert(`¡Éxito! Su pedido ${order.id} está listo.`);
+    cart = []; updateUI(); closeCheckout(); toggleCart(); renderAdmin();
 };
 
 function renderAdmin() {
     const tbody = document.getElementById('admin-orders');
     const totalVentas = orders.reduce((s, o) => s + o.amount, 0);
-    
     document.getElementById('stat-ventas').innerText = `₡${totalVentas.toLocaleString()}`;
     document.getElementById('stat-pedidos').innerText = orders.length;
 
@@ -342,16 +315,12 @@ function renderAdmin() {
         <tr class="hover:bg-gray-50 transition-colors">
             <td class="px-6 py-4 font-bold text-forest-700">${o.id}</td>
             <td class="px-6 py-4 font-medium text-gray-600">${o.client}</td>
-            <td class="px-6 py-4 text-[10px] font-bold uppercase text-gray-400">${o.method}</td>
+            <td class="px-6 py-4 text-[10px] font-bold uppercase text-gray-400 italic">${o.method}</td>
             <td class="px-6 py-4 font-black text-forest-900">₡${o.amount.toLocaleString()}</td>
-            <td class="px-6 py-4">
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">PAGADO ✓</span>
-            </td>
+            <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">PAGADO ✓</span></td>
         </tr>
     `).join('');
 }
-
-renderCatalog();
 </script>
 </body>
 </html>
