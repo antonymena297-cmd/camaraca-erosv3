@@ -665,7 +665,7 @@ footer { background: #0d1f0d; color: white; padding: 60px 0 0; }
         </div>
         <div class="location-info">
           <div class="location-detail"><i class="fa fa-map-marker-alt"></i> Frente a Carr. Interamericana Sur, Daniel Flores, 11903</div>
-          <div class="location-detail"><i class="fa fa-phone"></i> 8456-2817</div>
+          <div class="location-detail"><i class="fa fa-phone"></i> 88488-9696</div>
           <div class="location-detail"><i class="fa fa-clock"></i> Lun–Sáb: 6:00 a.m. – 5:00 p.m.</div>
           <div class="location-detail"><i class="fa fa-store"></i> Retiro en tienda · Entrega a domicilio</div>
           <div class="location-actions">
@@ -673,7 +673,7 @@ footer { background: #0d1f0d; color: white; padding: 60px 0 0; }
               <a href="https://maps.google.com/?q=9.3552,-83.7012" target="_blank" class="btn-maps"><i class="fa fa-map"></i> Google Maps</a>
               <a href="https://waze.com/ul?ll=9.3552,-83.7012&navigate=yes" target="_blank" class="btn-maps btn-waze"><i class="fab fa-waze"></i> Waze</a>
             </div>
-            <a href="https://wa.me/50684562817" target="_blank" class="btn-maps btn-wa-loc"><i class="fab fa-whatsapp"></i> WhatsApp Daniel Flores</a>
+            <a href="https://wa.me/50684889696" target="_blank" class="btn-maps btn-wa-loc"><i class="fab fa-whatsapp"></i> WhatsApp Daniel Flores</a>
           </div>
         </div>
       </div>
@@ -1200,7 +1200,7 @@ function processCardPayment() {
   document.getElementById('successScreen').style.display = 'block';
   const orderDetails = cart.map(i => `${i.name} x${i.qty} = ₡${(i.price*i.qty).toLocaleString('es-CR')}`).join('%0A');
   const msg = `🧾 *COMPROBANTE DE COMPRA*%0A%0A📋 Orden: *${orderNum}*%0A📅 Fecha: ${new Date().toLocaleDateString('es-CR')}%0A%0A*Productos:*%0A${orderDetails}%0A%0A💰 *Total: ₡${getCartTotal().toLocaleString('es-CR')}*%0A%0A✅ Pago confirmado con tarjeta.`;
-  document.getElementById('btnWaReceipt').onclick = () => window.open(`https://wa.me/50627714897?text=${msg}`, '_blank');
+  document.getElementById('btnWaReceipt').onclick = () => window.open(`https://wa.me/50684562817?text=${msg}`, '_blank');
 }
 
 function sendSinpeWhatsapp() {
@@ -1209,7 +1209,7 @@ function sendSinpeWhatsapp() {
   const orderNum = generateOrderNum();
   const orderDetails = cart.map(i => `${i.name} x${i.qty} = ₡${(i.price*i.qty).toLocaleString('es-CR')}`).join('%0A');
   const msg = `📲 *COMPROBANTE SINPE MÓVIL*%0A%0A📋 Orden: *${orderNum}*%0A📅 Fecha: ${new Date().toLocaleDateString('es-CR')}%0A👤 Nombre: ${name}%0A📞 Teléfono: ${phone}%0A%0A*Productos:*%0A${orderDetails}%0A%0A💰 *Total: ₡${getCartTotal().toLocaleString('es-CR')}*%0A%0A📸 [Adjunto comprobante de SINPE Móvil manualmente]`;
-  window.open(`https://wa.me/50627714897?text=${msg}`, '_blank');
+  window.open(`https://wa.me/50684562817?text=${msg}`, '_blank');
 }
 
 function previewSinpe(input) {
@@ -1308,7 +1308,7 @@ function sendQuote() {
   const company = document.getElementById('qCompany').value;
   const qty = document.getElementById('qQty').value;
   const msg = `📋 *SOLICITUD DE COTIZACIÓN*%0A%0A👤 Nombre: ${name.value}%0A🏢 Empresa: ${company || 'No indicada'}%0A📞 Teléfono: ${phone.value}%0A📧 Correo: ${email.value}%0A%0A🛒 Productos/Servicios:%0A${products_field.value.replace(/\n/g,'%0A')}%0A%0A📦 Cantidad aproximada: ${qty || 'No indicada'}%0A%0A¡Gracias!`;
-  window.open(`https://wa.me/50627714897?text=${msg}`, '_blank');
+  window.open(`https://wa.me/50684562817?text=${msg}`, '_blank');
   closeModal('quoteModal');
   showToast('✅ Cotización enviada por WhatsApp');
 }
